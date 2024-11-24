@@ -4,6 +4,7 @@ import { generatePalette } from '../utils/colorGenerator';
 import { ColorCard } from '../components/ColorCard';
 import { Helmet } from 'react-helmet'; // Importing React Helmet
 
+
 export default function Home() {
   const [text, setText] = useState('');
   const [colors, setColors] = useState<string[]>([]);
@@ -104,7 +105,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <GoogleAd />
+      
     </>
   );
 }

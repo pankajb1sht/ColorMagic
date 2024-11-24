@@ -4,7 +4,7 @@ import { ImageDown, Upload } from 'lucide-react';
 import * as tf from '@tensorflow/tfjs';
 import { ColorCard } from '../components/ColorCard';
 import { Helmet } from 'react-helmet'; // Importing React Helmet
-import GoogleAd from '../components/GoogleAd';
+
 
 export default function ImageExtractor() {
   const [image, setImage] = useState<string | null>(null);
@@ -169,7 +169,7 @@ export default function ImageExtractor() {
           )}
         </div>
       </div>
-      <GoogleAd />
+      
     </>
   );
 }
