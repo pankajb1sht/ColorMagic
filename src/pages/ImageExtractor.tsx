@@ -1,10 +1,8 @@
-import { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { ImageDown, Upload } from 'lucide-react';
 import * as tf from '@tensorflow/tfjs';
 import { ColorCard } from '../components/ColorCard';
-import { Helmet } from 'react-helmet'; // Importing React Helmet
-
 
 export default function ImageExtractor() {
   const [image, setImage] = useState<string | null>(null);
@@ -17,7 +15,7 @@ export default function ImageExtractor() {
       const img = new Image();
       img.crossOrigin = 'anonymous';
       img.src = imageUrl;
-
+      
       await new Promise((resolve) => {
         img.onload = resolve;
       });
@@ -78,99 +76,67 @@ export default function ImageExtractor() {
   });
 
   return (
-    <>
-      {/* SEO Management with Helmet */}
-      <Helmet>
-        <title>AI Color Extractor - Extract Color Palette from Your Images</title>
-        <meta
-          name="description"
-          content="Upload an image to extract a beautiful and harmonious color palette using AI. Perfect for web design and creative projects."
-        />
-        <meta
-          name="keywords"
-          content="AI color extractor, image color palette, color extraction, web design, color palette generator"
-        />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="AI Color Extractor - Extract Color Palette from Your Images" />
-        <meta
-          property="og:description"
-          content="Upload an image to extract a beautiful and harmonious color palette using AI. Perfect for web design and creative projects."
-        />
-        <meta property="og:image" content="https://www.yourwebsite.com/your-image.jpg" /> {/* Replace with your own image URL */}
-        <meta property="og:url" content={window.location.href} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="AI Color Extractor - Extract Color Palette from Your Images" />
-        <meta
-          name="twitter:description"
-          content="Upload an image to extract a beautiful and harmonious color palette using AI. Perfect for web design and creative projects."
-        />
-        <meta name="twitter:image" content="https://www.yourwebsite.com/your-image.jpg" /> {/* Replace with your own image URL */}
-      </Helmet>
-
-      {/* Page Content */}
-      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-8">
-            <ImageDown className="mx-auto h-12 w-12 text-indigo-600" />
-            <h2 className="mt-4 text-3xl font-bold text-gray-900">AI Color Extractor</h2>
-            <p className="mt-2 text-gray-600">
-              Upload an image and let AI extract a beautiful color palette
-            </p>
-          </div>
-
-          <div
-            {...getRootProps()}
-            className={`mt-8 flex justify-center px-6 pt-5 pb-6 border-2 ${
-              isDragActive ? 'border-indigo-500 bg-indigo-50' : 'border-gray-300'
-            } border-dashed rounded-lg cursor-pointer hover:border-indigo-500 transition-colors duration-200`}
-          >
-            <input {...getInputProps()} />
-            <div className="space-y-1 text-center">
-              <Upload className="mx-auto h-12 w-12 text-gray-400" />
-              <div className="flex text-sm text-gray-600">
-                <label className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500">
-                  <span>Upload a file</span>
-                </label>
-                <p className="pl-1">or drag and drop</p>
-              </div>
-              <p className="text-xs text-gray-500">PNG, JPG, JPEG up to 10MB</p>
-            </div>
-          </div>
-
-          {loading && (
-            <div className="mt-8 text-center">
-              <div className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Extracting colors...
-              </div>
-            </div>
-          )}
-
-          {image && (
-            <div className="mt-8">
-              <div className="relative rounded-lg overflow-hidden">
-                <img src={image} alt="Uploaded" className="w-full h-64 object-cover" />
-              </div>
-            </div>
-          )}
-
-          {colors.length > 0 && (
-            <div className="mt-8">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Extracted Colors</h3>
-              <div className="grid grid-cols-5 gap-4 h-32">
-                {colors.map((color, index) => (
-                  <ColorCard key={color} color={color} index={index} />
-                ))}
-              </div>
-            </div>
-          )}
+    <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-8">
+          <ImageDown className="mx-auto h-12 w-12 text-indigo-600" />
+          <h2 className="mt-4 text-3xl font-bold text-gray-900">AI Color Extractor</h2>
+          <p className="mt-2 text-gray-600">
+            Upload an image and let AI extract a beautiful color palette
+          </p>
         </div>
+
+        <div
+          {...getRootProps()}
+          className={`mt-8 flex justify-center px-6 pt-5 pb-6 border-2 ${
+            isDragActive ? 'border-indigo-500 bg-indigo-50' : 'border-gray-300'
+          } border-dashed rounded-lg cursor-pointer hover:border-indigo-500 transition-colors duration-200`}
+        >
+          <input {...getInputProps()} />
+          <div className="space-y-1 text-center">
+            <Upload className="mx-auto h-12 w-12 text-gray-400" />
+            <div className="flex text-sm text-gray-600">
+              <label className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500">
+                <span>Upload a file</span>
+              </label>
+              <p className="pl-1">or drag and drop</p>
+            </div>
+            <p className="text-xs text-gray-500">PNG, JPG, JPEG up to 10MB</p>
+          </div>
+        </div>
+
+        {loading && (
+          <div className="mt-8 text-center">
+            <div className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500">
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Extracting colors...
+            </div>
+          </div>
+        )}
+
+        {image && (
+          <div className="mt-8">
+            <div className="relative rounded-lg overflow-hidden">
+              <img src={image} alt="Uploaded" className="w-full h-64 object-cover" />
+            </div>
+          </div>
+        )}
+
+        {colors.length > 0 && (
+          <div className="mt-8">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Extracted Colors</h3>
+            <div className="grid grid-cols-5 gap-4 h-32">
+              {colors.map((color, index) => (
+                <ColorCard key={color} color={color} index={index} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-      
-    </>
+    </div>
   );
 }
 

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Palette, Heart, Wrench, ImageDown, Shuffle } from 'lucide-react';
+import { Palette, Heart, Wrench, ImageDown, Shuffle, LogIn } from 'lucide-react';
+import { useAuthStore } from '../stores/authStore';
 
 export function Navbar() {
-  const [showTools, setShowTools] = React.useState(false);
+  const [showTools, setShowTools] = useState(false);
   const location = useLocation();
+  const { user, signInWithGoogle, signOut } = useAuthStore();
 
   return (
     <nav className="bg-white border-b border-gray-200">
@@ -29,14 +31,28 @@ export function Navbar() {
               >
                 Explore
               </Link>
-              <a href="#" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+              <Link 
+                to="/liked"
+                className={`${
+                  location.pathname === '/liked'
+                    ? 'border-indigo-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
                 <Heart className="w-4 h-4 mr-1" />
                 Liked
-              </a>
-              <div className="relative inline-flex items-center">
+              </Link>
+              <div 
+                className="relative"
+                onMouseEnter={() => setShowTools(true)}
+                onMouseLeave={() => setShowTools(false)}
+              >
                 <button 
-                  onClick={() => setShowTools(!showTools)}
-                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  className={`${
+                    ['/random-palette', '/image-extractor'].includes(location.pathname)
+                      ? 'border-indigo-500 text-gray-900'
+                      : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
                 >
                   <Wrench className="w-4 h-4 mr-1" />
                   Tools
@@ -44,12 +60,15 @@ export function Navbar() {
                 
                 {/* Tools Dropdown */}
                 {showTools && (
-                  <div className="absolute z-10 top-full mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <div className="absolute z-10 left-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                     <div className="py-1" role="menu">
-                      <a href="#" className="group flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">
+                      <Link
+                        to="/random-palette"
+                        className="group flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50"
+                      >
                         <Shuffle className="mr-3 h-5 w-5 text-gray-400 group-hover:text-indigo-500" />
                         Random Generator
-                      </a>
+                      </Link>
                       <Link
                         to="/image-extractor"
                         className="group flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50"
@@ -66,18 +85,38 @@ export function Navbar() {
 
           {/* Right side buttons */}
           <div className="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
-            <Link
-              to="/login"
-              className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Log in
-            </Link>
-            <Link
-              to="/signup"
-              className="bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
-            >
-              Sign up
-            </Link>
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <Link
+                  to={`/profile/${user.uid}`}
+                  className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={() => signOut()}
+                  className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Sign out
+                </button>
+              </div>
+            ) : (
+              <>
+                <button
+                  onClick={() => signInWithGoogle()}
+                  className="flex items-center gap-2 bg-white text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-md text-sm font-medium border border-gray-300 transition-colors"
+                >
+                  <img src="/google.svg" alt="Google" className="w-4 h-4" />
+                  Sign in with Google
+                </button>
+                <Link
+                  to="/signup"
+                  className="bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                >
+                  Sign up
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -100,9 +139,18 @@ export function Navbar() {
           >
             Explore
           </Link>
-          <a href="#" className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+          <Link
+            to="/liked"
+            className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+          >
             Liked
-          </a>
+          </Link>
+          <Link
+            to="/random-palette"
+            className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+          >
+            Random Generator
+          </Link>
           <Link
             to="/image-extractor"
             className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"

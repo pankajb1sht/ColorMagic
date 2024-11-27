@@ -1,5 +1,5 @@
 {
-  "name": "text-to-color-palette",
+  "name": "colormagic-link",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,17 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.2.1",
     "@tensorflow/tfjs": "^4.17.0",
-    "@vercel/speed-insights": "^1.1.0",
-    "firebase": "^11.0.2",
+    "firebase": "^10.8.0",
+    "i18next": "^23.10.1",
+    "i18next-browser-languagedetector": "^7.2.0",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-dropzone": "^14.2.3",
-    "react-firebase-hooks": "^5.1.1",
-    "react-helmet": "^6.1.0",
     "react-hot-toast": "^2.4.1",
-    "react-router-dom": "^6.22.3"
+    "react-i18next": "^14.1.0",
+    "react-router-dom": "^6.22.3",
+    "zustand": "^4.5.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",

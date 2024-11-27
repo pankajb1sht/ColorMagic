@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Palette, Wand2 } from 'lucide-react';
 import { generatePalette } from '../utils/colorGenerator';
 import { ColorCard } from '../components/ColorCard';
-import { Helmet } from 'react-helmet'; // Importing React Helmet
-
 
 export default function Home() {
   const [text, setText] = useState('');
@@ -17,34 +15,6 @@ export default function Home() {
 
   return (
     <>
-      {/* SEO Management with Helmet */}
-      <Helmet>
-        <title>Color Palette Generator – Create Beautiful Color Themes for Your Website</title>
-        <meta
-          name="description"
-          content="Generate beautiful, harmonious color palettes based on any text you input. Perfect for web design and creative projects."
-        />
-        <meta
-          name="keywords"
-          content="color palette generator, color scheme generator, create color palette, color themes, web design, color harmony"
-        />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="Color Palette Generator – Create Beautiful Color Themes for Your Website" />
-        <meta
-          property="og:description"
-          content="Generate beautiful, harmonious color palettes based on any text you input. Perfect for web design and creative projects."
-        />
-        <meta property="og:image" content="https://www.yourwebsite.com/your-image.jpg" /> {/* Replace with your own image URL */}
-        <meta property="og:url" content={window.location.href} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Color Palette Generator – Create Beautiful Color Themes for Your Website" />
-        <meta
-          name="twitter:description"
-          content="Generate beautiful, harmonious color palettes based on any text you input. Perfect for web design and creative projects."
-        />
-        <meta name="twitter:image" content="https://www.yourwebsite.com/your-image.jpg" /> {/* Replace with your own image URL */}
-      </Helmet>
-
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
@@ -105,7 +75,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-      
     </>
   );
 }
