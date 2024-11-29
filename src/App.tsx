@@ -9,7 +9,10 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ImageExtractor from './pages/ImageExtractor';
 import RandomPalette from './pages/RandomPalette';
+<<<<<<< HEAD
 import BackgroundRemoval from './pages/BackgroundRemoval';
+=======
+>>>>>>> origin/main
 import Profile from './pages/Profile';
 import LikedPalettes from './pages/LikedPalettes';
 import { Navbar } from './components/Navbar';
@@ -39,7 +42,10 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/image-extractor" element={<ImageExtractor />} />
             <Route path="/random-palette" element={<RandomPalette />} />
+<<<<<<< HEAD
             <Route path="/background-removal" element={<BackgroundRemoval />} />
+=======
+>>>>>>> origin/main
             <Route path="/profile/:userId" element={<Profile />} />
             <Route path="/liked" element={<LikedPalettes />} />
           </Routes>

@@ -44,6 +44,7 @@ export function adjustBrightness(hex: string, percent: number): string {
   const newB = Math.round((t - b) * p) + b;
 
   return rgbToHex(newR, newG, newB);
+<<<<<<< HEAD
 }
 
 // Color name mapping
@@ -177,4 +178,6 @@ function hslToHex(h: number, s: number, l: number): string {
     Math.round(g * 255),
     Math.round(b * 255)
   );
+=======
+>>>>>>> origin/main
 }

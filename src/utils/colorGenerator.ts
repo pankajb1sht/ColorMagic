@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import { colorNames, generateColorVariations } from './colorUtils';
 
+=======
+>>>>>>> origin/main
 function hashString(str: string): number {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
@@ -43,6 +46,7 @@ function HSLToHex(h: number, s: number, l: number): string {
 export function generatePalette(text: string): string[] {
   if (!text.trim()) return [];
   
+<<<<<<< HEAD
   // Check if the input is a color name
   const lowerText = text.toLowerCase();
   if (colorNames[lowerText]) {
@@ -53,6 +57,12 @@ export function generatePalette(text: string): string[] {
   const hash = hashString(text);
   const baseHue = hash % 360;
   
+=======
+  const hash = hashString(text);
+  const baseHue = hash % 360;
+  
+  // Generate a more harmonious palette using color theory
+>>>>>>> origin/main
   return [
     HSLToHex(baseHue, 90, 50),                     // Primary color
     HSLToHex((baseHue + 30) % 360, 85, 60),        // Analogous color
