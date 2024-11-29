@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 User-agent: *
 Allow: /
 
 Sitemap: https://colormagic.link/sitemap.xml
-=======
-User-agent: *
-Disallow:
->>>>>>> origin/main
